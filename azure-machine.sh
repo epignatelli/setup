@@ -39,7 +39,6 @@ function install_anaconda {
 
     # activate shell
     source $HOME/anaconda3/etc/profile.d/conda.sh
-    ./anaconda3/bin/conda init
 }
 
 
