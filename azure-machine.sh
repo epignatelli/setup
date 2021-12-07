@@ -5,7 +5,7 @@ function install_rdp {
     sudo apt install xfce4-session
 
     # install xrpd
-    sudo apt-get install xrdp
+    sudo apt-get -y install xrdp
     sudo systemctl enable xrdp
 
     # set desktop environment manager on rdp
