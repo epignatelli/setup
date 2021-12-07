@@ -2,7 +2,7 @@ function install_rdp {
     # install xfce4
     sudo apt-get update
     sudo apt-get -y install xfce4
-    sudo apt install xfce4-session
+    sudo apt-get -y install xfce4-session
 
     # install xrpd
     sudo apt-get -y install xrdp
@@ -17,12 +17,12 @@ function install_rdp {
 
 function install_git {
     # install git
-    sudo apt-get install git
+    sudo apt-get -y install git
 }
 
 function install_azure_cli {
     # install azure utility
-    sudo apt install azure-cli
+    sudo apt-get -y install azure-cli
 }
 
 function install_anaconda {
