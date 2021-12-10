@@ -44,8 +44,14 @@ function install_anaconda {
     echo "source $HOME/anaconda3/etc/profile.d/conda.sh" >> ~/.bashrc
 }
 
+function install_chrome {
+    # download chrome
+    wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+    sudo apt-get -y install ./google-chrome-stable_current_amd64.deb
+}
 
 install_rdp
 install_git
 install_azure_cli
+install_chrome
 conda list || install_anaconda
