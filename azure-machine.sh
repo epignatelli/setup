@@ -27,20 +27,18 @@ function install_azure_cli {
 
 function install_anaconda {
     # exit if anaconda already installed
-    if [ -d ~/anaconda3 ]; then
-        return 0
+    if [ ! -d ~/anaconda3 ]; then
+        # install anaconda prerequisites
+        sudo apt-get -y install libgl1-mesa-glx libegl1-mesa libxrandr2 libxrandr2 libxss1 libxcursor1 libxcomposite1 libasound2 libxi6 libxtst6
+        
+        # download and install anaconda
+        filename=$(curl https://repo.anaconda.com/archive/ | grep  Linux-x86_64 | sed -n '$p' | grep -o '<a .*href=.*>' | sed -e 's/<a /\n<a /g' | sed -e 's/<a .*href=['"'"'"]//' -e 's/["'"'"'].*$//' -e '/^$/ d')
+        url=https://repo.anaconda.com/archive/$filename
+        wget $url
+        sudo chmod +x $filename
+        bash $filename -b  -p $HOME/anaconda3
+        rm $filename        
     fi
-    
-    # install anaconda prerequisites
-    sudo apt-get -y install libgl1-mesa-glx libegl1-mesa libxrandr2 libxrandr2 libxss1 libxcursor1 libxcomposite1 libasound2 libxi6 libxtst6
-
-    # download and install anaconda
-    filename=$(curl https://repo.anaconda.com/archive/ | grep  Linux-x86_64 | sed -n '$p' | grep -o '<a .*href=.*>' | sed -e 's/<a /\n<a /g' | sed -e 's/<a .*href=['"'"'"]//' -e 's/["'"'"'].*$//' -e '/^$/ d')
-    url=https://repo.anaconda.com/archive/$filename
-    wget $url
-    sudo chmod +x $filename
-    bash $filename -b  -p $HOME/anaconda3
-    rm $filename
 
     # activate shell
     source $HOME/anaconda3/etc/profile.d/conda.sh
