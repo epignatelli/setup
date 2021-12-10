@@ -26,6 +26,11 @@ function install_azure_cli {
 }
 
 function install_anaconda {
+    # exit if anaconda already installed
+    if [ -d ~/anaconda3 ]; then
+        return 0
+    fi
+    
     # install anaconda prerequisites
     sudo apt-get -y install libgl1-mesa-glx libegl1-mesa libxrandr2 libxrandr2 libxss1 libxcursor1 libxcomposite1 libasound2 libxi6 libxtst6
 
@@ -54,4 +59,4 @@ install_rdp
 install_git
 install_azure_cli
 install_chrome
-conda list || install_anaconda
+install_anaconda
