@@ -39,6 +39,9 @@ function install_anaconda {
 
     # activate shell
     source $HOME/anaconda3/etc/profile.d/conda.sh
+    
+    # activate on login
+    "source $HOME/anaconda3/etc/profile.d/conda.sh" >> ~/.bashrc
 }
 
 
