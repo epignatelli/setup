@@ -1,9 +1,9 @@
-function update_repos {
+function update_repos () {
     sudo apt-get update
     sudo apt update
 }
 
-function install_rdp {
+function install_rdp () {
     # install xfce4
     sudo apt-get update
     sudo apt-get -y install xfce4
@@ -20,12 +20,12 @@ function install_rdp {
     sudo service xrdp restart
 }
 
-function install_git {
+function install_git () {
     # install git
     sudo apt-get -y install git
 }
 
-function install_anaconda {
+function install_anaconda () {
     # exit if anaconda already installed
     if [ ! -d ~/anaconda3 ]; then
         # install anaconda prerequisites
@@ -47,17 +47,31 @@ function install_anaconda {
     echo "source $HOME/anaconda3/etc/profile.d/conda.sh" >> ~/.bashrc
 }
 
-function install_chrome {
+function install_chrome () {
     # download chrome
     wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
     sudo apt-get -y install ./google-chrome-stable_current_amd64.deb
 }
 
-function install_ohmyzsh {
-    wget https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh -O -
+function enable_ohmyzsh_plugin () {
+    # TODO(ep): check for the plugin keyword to already exist
+    sed 's/^plugins=(\(.*\)/plugins=($1 \1/' $HOME/.zshrc
 }
 
-function install_tilda {
+function install_ohmyzsh () {
+    # install zsh
+    wget https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh -O -
+    
+    # enable zsh-syntax-highlighting
+    git clone https://github.com/zsh-users/zsh-syntax-highlighting $HOME/.oh-my-zsh/custom/plugins
+    enable_ohmyzsh_plugin 'zsh-syntax-highlighting'
+    
+    # enable zsh-autosuggestions
+    git clone https://github.com/zsh-users/zsh-autosuggestions $HOME/.oh-my-zsh/custom/plugins
+    enable_ohmyzsh_plugin 'zsh-autosuggestions'
+}
+
+function install_tilda () {
     sudo apt-get -y install tilda
 }
 
