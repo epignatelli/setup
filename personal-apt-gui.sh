@@ -31,9 +31,10 @@ function install_anaconda () {
         # install anaconda prerequisites
         sudo apt-get -y install libgl1-mesa-glx libegl1-mesa libxrandr2 libxrandr2 libxss1 libxcursor1 libxcomposite1 libasound2 libxi6 libxtst6
         
-        # download and install anaconda
+        # get latest linux version
         filename=$(curl https://repo.anaconda.com/archive/ | grep  Linux-x86_64 | sed -n '$p' | grep -o '<a .*href=.*>' | sed -e 's/<a /\n<a /g' | sed -e 's/<a .*href=['"'"'"]//' -e 's/["'"'"'].*$//' -e '/^$/ d')
         url=https://repo.anaconda.com/archive/$filename
+        # download and install anaconda
         wget $url
         sudo chmod +x $filename
         bash $filename -b  -p $HOME/anaconda3
@@ -76,6 +77,7 @@ function install_tilda () {
 }
 
 update_repos
+install_rdp
 install_git
 install_anaconda
 install_ohmyzsh
