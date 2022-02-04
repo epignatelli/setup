@@ -48,12 +48,6 @@ function install_anaconda () {
     echo "source $HOME/anaconda3/etc/profile.d/conda.sh" >> ~/.bashrc
 }
 
-function install_chrome () {
-    # download chrome
-    wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
-    sudo apt-get -y install ./google-chrome-stable_current_amd64.deb
-}
-
 function enable_ohmyzsh_plugin () {
     # TODO(ep): check for the plugin keyword to already exist
     sed 's/^plugins=(\(.*\)/plugins=($1 \1/' $HOME/.zshrc
@@ -76,6 +70,16 @@ function install_tilda () {
     sudo apt-get -y install tilda
 }
 
+function install_firefox () {
+    sudo apt-get install firefox
+}
+
+function install_chrome () {
+    # download chrome
+    wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+    sudo apt-get -y install ./google-chrome-stable_current_amd64.deb
+}
+
 update_repos
 install_rdp
 install_git
@@ -84,4 +88,3 @@ install_ohmyzsh
 install_tilda
 install_chrome
 install_firefox
-install_rdp
