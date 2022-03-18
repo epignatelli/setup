@@ -45,7 +45,6 @@ function install_ohmyzsh () {
     enable_ohmyzsh_plugin 'zsh-autosuggestions'
 }
 
-update_repos
 install_git
 install_anaconda
 install_ohmyzsh
