@@ -17,10 +17,11 @@ function install_anaconda () {
         # get latest linux version
         filename=$(curl https://repo.anaconda.com/archive/ | grep  Linux-x86_64 | sed -n '$p' | grep -o '<a .*href=.*>' | sed -e 's/<a /\n<a /g' | sed -e 's/<a .*href=['"'"'"]//' -e 's/["'"'"'].*$//' -e '/^$/ d')
         url=https://repo.anaconda.com/archive/$filename
+
         # download and install anaconda
         wget $url
         sudo chmod +x $filename
-        bash $filename -b  -p $HOME/anaconda3
+        bash $filename -b -p $HOME/anaconda3
         rm $filename        
     fi
 
@@ -29,6 +30,19 @@ function install_anaconda () {
     
     # activate on login
     echo "source $HOME/anaconda3/etc/profile.d/conda.sh" >> ~/.bashrc
+}
+
+function install_miniforge () {
+    # get latest Miniforge
+    release='Linux-x86_64'
+    url=https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge3-$release.sh
+    filename=Miniforge3-latest-$release.sh
+    
+    # download and install miniforge
+    wget $url
+    sudo chmod +x $filename
+    bash $filename
+    rm $filename
 }
 
 function enable_ohmyzsh_plugin () {
@@ -49,7 +63,14 @@ function install_ohmyzsh () {
     enable_ohmyzsh_plugin 'zsh-autosuggestions'
 }
 
+function install_thefuck () {
+    pip install thefuck
+}
+
+# main
 update_repos
 install_git
 install_anaconda
 install_ohmyzsh
+enable_ohmyzsh_plugin
+install_thefuck
